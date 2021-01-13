@@ -1,18 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <label for="email">
+      Email
+    </label>
+    <input v-model="email" id="Email" type="text" placeholder="Email">
   </div>
+  <div>
+    <label for="password">
+      Password
+    </label>
+    <input v-model="password" id="password" type="password" placeholder="******************">
+  </div>
+  <button @click="login">
+    Sign In
+  </button>
+  <p v-if='loginUser'>{{ loginUser }}</p>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import { defineComponent, reactive, ref, toRefs } from 'vue'
+import { login } from '@/api/auth'
 
 export default defineComponent({
   name: 'Home',
-  components: {
-    HelloWorld
+  setup () {
+    const formData = reactive({
+      email: '',
+      password: ''
+    })
+
+    const loginUser = ref('')
+
+    return {
+      loginUser,
+      ...toRefs(formData),
+      login: async () => {
+        await login(formData.email, formData.password)
+          .then((res) => {
+            loginUser.value = res.data.email
+          })
+      }
+    }
   }
 })
 </script>
