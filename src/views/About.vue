@@ -1,28 +1,16 @@
 <template>
-  <div v-if="!$auth.loading.value">
-    <button v-if="!$auth.isAuthenticated.value" @click="login">Log in</button>
-    <button v-if="$auth.isAuthenticated.value" @click="logout">Log out</button>
+  <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+    <div>
+      <div class="text-xl font-medium text-black">ChitChat</div>
+      <p class="text-gray-500">You have a new message!</p>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'About',
-  setup () {
-    const auth = inject<any>('$auth')
-
-    return {
-      login: () => {
-        auth.loginWithRedirect()
-      },
-      logout: () => {
-        auth.logout({
-          returnTo: window.location.origin
-        })
-      }
-    }
-  }
+  name: 'About'
 })
 </script>

@@ -2,7 +2,6 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '@/views/Home.vue'
 import Post from '@/views/Post.vue'
 import NewPost from '@/views/NewPost.vue'
-import { routeGuard } from '@/auth'
 
 const routes: Array<RouteRecordRaw> = [
   {
