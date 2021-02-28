@@ -7,7 +7,6 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
 import AppPost from '@/components/AppPost.vue'
-import router from '@/router'
 import { getPosts } from '@/api/post'
 
 export default defineComponent({
@@ -18,10 +17,6 @@ export default defineComponent({
 
   setup () {
     const posts = ref([] as any[])
-    const moveNewPost = () => {
-      router.push('/posts/new')
-    }
-
     const onGetPosts = async () => {
       await getPosts()
         .then((data) => {
@@ -38,8 +33,7 @@ export default defineComponent({
     })
 
     return {
-      posts,
-      moveNewPost
+      posts
     }
   }
 })
