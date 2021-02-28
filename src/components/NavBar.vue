@@ -7,7 +7,7 @@
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
-              <a href="#" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Top</a>
+              <button @click='movePosts()' class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Top</button>
             </div>
           </div>
         </div>
@@ -34,8 +34,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import router from '@/router'
 
 export default defineComponent({
-  name: 'NavBar'
+  name: 'NavBar',
+
+  setup () {
+    const movePosts = () => {
+      router.push('/posts')
+    }
+
+    const moveNewPost = () => {
+      router.push('/posts/new')
+    }
+
+    return {
+      movePosts,
+      moveNewPost
+    }
+  }
 })
 </script>
