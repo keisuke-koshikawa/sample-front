@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Login from '@/views/Login.vue'
 import Post from '@/views/Post.vue'
+import PostDetail from '@/views/PostDetail.vue'
 import NewPost from '@/views/NewPost.vue'
 import { authorizeToken } from './guards'
 
@@ -24,10 +25,10 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/about',
-    name: 'About',
-    meta: { requiresAuth: true },
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/posts/:id',
+    name: 'PostDetail',
+    component: PostDetail,
+    meta: { requiresAuth: true }
   }
 ]
 

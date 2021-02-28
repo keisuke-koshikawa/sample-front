@@ -15,7 +15,7 @@ export const getPosts = async () => {
 }
 
 export const getPost = async (id: string) => {
-  return await Client.get(`users/1/posts/${id}`, { headers: getAuthDataFromStorage })
+  return await Client.get(`users/1/posts/${id}`, { headers: getAuthDataFromStorage() })
     .then((response) => {
       return response.data
     })
