@@ -1,39 +1,45 @@
 <template>
-  <button @click="handleLogout()">Logout</button>
-  <button @click='moveNewPost()'>New</button>
-  <div>
+  <div class="grid grid-cols-3 gap-1">
     <AppPost :post="post" v-for="(post, index) in posts" :key="index" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { logout } from '@/api/auth'
+import { defineComponent, onMounted, ref } from 'vue'
 import AppPost from '@/components/AppPost.vue'
 import router from '@/router'
+import { getPosts } from '@/api/post'
 
 export default defineComponent({
   name: 'Post',
   components: {
     AppPost
   },
+
   setup () {
-    const email = localStorage.getItem('uid')
-    const posts = ['name', 'title', 'body']
+    const posts = ref([] as any[])
     const moveNewPost = () => {
       router.push('/posts/new')
     }
-    const handleLogout = () => {
-      logout().then(() => {
-        router.push('/home')
-      })
+
+    const onGetPosts = async () => {
+      await getPosts()
+        .then((data) => {
+          posts.value = data
+        })
+        .catch((error: Error) => {
+          console.info(error.message)
+          alert('原因不明のエラーが発生しました。リロードすることで解決することがあります。')
+        })
     }
 
+    onMounted(() => {
+      onGetPosts()
+    })
+
     return {
-      email,
       posts,
-      moveNewPost,
-      handleLogout
+      moveNewPost
     }
   }
 })
