@@ -13,7 +13,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: { requiresNotAuth: true }
   },
   {
-    path: '/posts',
+    path: '/',
     name: 'Post',
     component: Post,
     meta: { requiresAuth: true }
