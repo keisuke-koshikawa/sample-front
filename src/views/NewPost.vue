@@ -10,10 +10,6 @@
         <label class="mb-2  font-bold text-lg text-grey-darkest" for="body">Body</label>
         <textarea v-model='body' class="border py-2 px-3 text-grey-darkest" name="body" id="body"></textarea>
       </div>
-      <div class="flex flex-col mb-4">
-        <label class="mb-2 font-bold text-lg text-grey-darkest" for="icatch">iCatch</label>
-        <input @change="setIcatch($event)" accept="image/png,image/jpeg" class="border py-2 px-3 text-grey-darkest" type="file">
-      </div>
       <button @click='handleCreatePost()' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 uppercase text-lg mx-auto rounded" type="submit">Create Post</button>
     </div>
   </div>
@@ -32,26 +28,16 @@ export default defineComponent({
       body: ''
     })
 
-    const formData = new FormData()
-
-    const setIcatch = (e: Event) => {
-      e.preventDefault()
-      if (e.target instanceof HTMLInputElement && e.target.files) {
-        formData.append('icatch', e.target.files[0])
-      }
+    const handleCreatePost = async () => {
+      await createPost(postData)
+        .then(() => {
+          router.push('/')
+        })
     }
 
     return {
       ...toRefs(postData),
-      setIcatch,
-      handleCreatePost: async () => {
-        formData.append('title', postData.title)
-        formData.append('body', postData.body)
-        await createPost(formData)
-          .then(() => {
-            router.push('/posts')
-          })
-      }
+      handleCreatePost
     }
   }
 })

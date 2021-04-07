@@ -8,6 +8,7 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import AppPost from '@/components/AppPost.vue'
 import { getPosts } from '@/api/post'
+import { Post } from '@/types/post'
 
 export default defineComponent({
   name: 'Post',
@@ -16,14 +17,14 @@ export default defineComponent({
   },
 
   setup () {
-    const posts = ref([] as any[])
+    const posts = ref([] as Post[])
     const onGetPosts = async () => {
       await getPosts()
-        .then((data) => {
-          posts.value = data
+        .then((res) => {
+          posts.value = res
         })
-        .catch((error: Error) => {
-          console.info(error.message)
+        .catch((err: Error) => {
+          console.info(err.message)
           alert('原因不明のエラーが発生しました。リロードすることで解決することがあります。')
         })
     }

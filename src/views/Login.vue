@@ -47,14 +47,23 @@ export default defineComponent({
       password: ''
     })
 
+    const handleLogin = async () => {
+      await login(formData.email, formData.password)
+        .then((res) => {
+          if (res?.status === 200) {
+            router.push('/')
+          } else {
+            alert('メールアドレスかパスワードが間違っています。')
+          }
+        })
+        .catch(() => {
+          alert('ログインに失敗しました。')
+        })
+    }
+
     return {
       ...toRefs(formData),
-      handleLogin: async () => {
-        await login(formData.email, formData.password)
-          .then(() => {
-            router.push('/posts')
-          })
-      }
+      handleLogin
     }
   }
 })
