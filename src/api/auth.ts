@@ -4,12 +4,17 @@ import {
   removeAuthDataFromStorage,
   setAuthDataFromResponse
 } from '@/utils/auth-data'
+import { AxiosError, AxiosResponse } from 'axios'
+import { User } from '@/types/user'
 
 export const login = async (email: string, password: string) => {
   return await Client.post('/auth/sign_in', { email, password })
-    .then((response) => {
-      setAuthDataFromResponse(response.headers)
-      return response.data
+    .then((res: AxiosResponse<User>) => {
+      setAuthDataFromResponse(res.headers)
+      return res
+    })
+    .catch((err: AxiosError) => {
+      return err.response
     })
 }
 
