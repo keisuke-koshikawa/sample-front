@@ -16,7 +16,7 @@ export const authorizeToken = (to: RouteLocationNormalized, from: RouteLocationN
         next({ path: '/' })
       })
       .catch(() => {
-        next({ path: '/login' })
+        next()
       })
   }
 }
