@@ -4,21 +4,18 @@ import {
   removeAuthDataFromStorage,
   setAuthDataFromResponse
 } from '@/utils/auth-data'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { User } from '@/types/user'
 
-export const login = async (email: string, password: string) => {
+export const login = async (email: string, password: string): Promise<AxiosResponse<User>> => {
   return await Client.post('/auth/sign_in', { email, password })
     .then((res: AxiosResponse<User>) => {
       setAuthDataFromResponse(res.headers)
       return res
     })
-    .catch((err: AxiosError) => {
-      return err.response
-    })
 }
 
-export const logout = async () => {
+export const logout = async (): Promise<void> => {
   return await Client.delete('/auth/sign_out', { headers: getAuthDataFromStorage() })
     .then(() => {
       removeAuthDataFromStorage()
@@ -27,8 +24,8 @@ export const logout = async () => {
 
 export const validateToken = async () => {
   return await Client.get('/auth/validate_token', { headers: getAuthDataFromStorage() })
-    .then((response) => {
-      setAuthDataFromResponse(response.headers)
-      return response.data
+    .then((res: AxiosResponse<User>) => {
+      setAuthDataFromResponse(res.headers)
+      return res
     })
 }
