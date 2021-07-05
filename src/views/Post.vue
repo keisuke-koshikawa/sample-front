@@ -1,6 +1,11 @@
 <template>
-  <div class="grid grid-cols-3 gap-1">
-    <AppPost :post="post" v-for="(post, index) in posts" :key="index" />
+  <div class="flex">
+    <div class="w-4/5">
+      <AppPost :post="post" v-for="(post, index) in posts" :key="index" />
+    </div>
+    <div>
+      <SideMenu />
+    </div>
   </div>
 </template>
 
@@ -9,11 +14,13 @@ import { defineComponent, onMounted, ref } from 'vue'
 import AppPost from '@/components/AppPost.vue'
 import { getPosts } from '@/api/post'
 import { Post } from '@/types/post'
+import SideMenu from '@/components/SideMenu.vue'
 
 export default defineComponent({
   name: 'Post',
   components: {
-    AppPost
+    AppPost,
+    SideMenu
   },
 
   setup () {

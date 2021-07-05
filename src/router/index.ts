@@ -3,6 +3,7 @@ import Login from '@/views/Login.vue'
 import Post from '@/views/Post.vue'
 import PostDetail from '@/views/PostDetail.vue'
 import NewPost from '@/views/NewPost.vue'
+import Account from '@/views/Account.vue'
 import { authorizeToken } from './guards'
 
 const routes: Array<RouteRecordRaw> = [
@@ -28,6 +29,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/posts/:id',
     name: 'PostDetail',
     component: PostDetail,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: Account,
     meta: { requiresAuth: true }
   }
 ]
