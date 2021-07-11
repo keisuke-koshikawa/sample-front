@@ -6,5 +6,3 @@ export type Post = {
   profile_image_url: string;
   icatch_url: string;
 }
-
-export type PostForRequest = Pick<Post, 'title' | 'body'>

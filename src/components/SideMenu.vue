@@ -21,42 +21,14 @@
       <div class="flex mb-6">
         <a class="mr-4">
           <div class="px-2 py-4 rounded-2xl relative bg-gray-100">
-            <p class="text-gray-900 leading-6 text-xs">Technology</p>
+            <p class="text-gray-900 leading-6 text-xs">Politics</p>
           </div>
         </a>
       </div>
       <div class="flex mb-6">
         <a class="mr-4">
           <div class="px-2 py-4 rounded-2xl relative bg-gray-100">
-            <p class="text-gray-900 leading-6 text-xs">Technology</p>
-          </div>
-        </a>
-      </div>
-      <div class="flex mb-6">
-        <a class="mr-4">
-          <div class="px-2 py-4 rounded-2xl relative bg-gray-100">
-            <p class="text-gray-900 leading-6 text-xs">Technology</p>
-          </div>
-        </a>
-      </div>
-      <div class="flex mb-6">
-        <a class="mr-4">
-          <div class="px-2 py-4 rounded-2xl relative bg-gray-100">
-            <p class="text-gray-900 leading-6 text-xs">Technology</p>
-          </div>
-        </a>
-      </div>
-      <div class="flex mb-6">
-        <a class="mr-4">
-          <div class="px-2 py-4 rounded-2xl relative bg-gray-100">
-            <p class="text-gray-900 leading-6 text-xs">Technology</p>
-          </div>
-        </a>
-      </div>
-      <div class="flex mb-6">
-        <a class="mr-4">
-          <div class="px-2 py-4 rounded-2xl relative bg-gray-100">
-            <p class="text-gray-900 leading-6 text-xs">Technology</p>
+            <p class="text-gray-900 leading-6 text-xs">Food</p>
           </div>
         </a>
       </div>
@@ -65,17 +37,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'SideMenu',
-
-  setup () {
-    const menu = ref('')
-
-    return {
-      menu
-    }
-  }
+  name: 'SideMenu'
 })
 </script>
