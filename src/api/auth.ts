@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import Client from '@/api/client'
 import {
   getAuthDataFromStorage,
@@ -7,8 +8,8 @@ import {
 import { AxiosError, AxiosResponse } from 'axios'
 import { User } from '@/types/user'
 
-export const login = async (email: string, password: string) => {
-  return await Client.post('/auth/sign_in', { email, password })
+export const login = async (email: string, password: string, otp_code: string) => {
+  return await Client.post('/auth/sign_in', { email, password, otp_code })
     .then((res: AxiosResponse<User>) => {
       setAuthDataFromResponse(res.headers)
       return res

@@ -43,24 +43,16 @@
 import { defineComponent } from 'vue'
 import router from '@/router'
 import { logout } from '@/api/auth'
-import { getAuthDataFromStorage } from '@/utils/auth-data'
+import { useState } from '@/state/use-state'
 
 export default defineComponent({
   name: 'NavBar',
 
   setup () {
-    const isUserSignedIn = () => {
-      const accessToken = getAuthDataFromStorage()['access-token']
-
-      if (accessToken) {
-        return true
-      } else {
-        return false
-      }
-    }
+    const state = useState()
 
     const movePosts = () => {
-      router.push('/posts')
+      router.push('/')
     }
 
     const moveNewPost = () => {
@@ -74,16 +66,25 @@ export default defineComponent({
     const handleLogOut = async () => {
       await logout()
         .then(() => {
+          state.removeAuthState()
           router.push('/login')
         })
     }
 
+    const isUserSignedIn = () => {
+      if (state.authState['access-token']) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     return {
-      isUserSignedIn,
       movePosts,
       moveNewPost,
       moveAccount,
-      handleLogOut
+      handleLogOut,
+      isUserSignedIn
     }
   }
 })
